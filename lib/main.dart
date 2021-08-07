@@ -4,20 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  // n gram
-  // Continuous sequence of text
-  /*
-  
-  "This rainbow"
-Trigram:
-
-  Thi
-  his
-  is_
-  s_r
-  
-  */
-
   runApp(
     MultiProvider(
       providers: [
@@ -53,9 +39,8 @@ class _MyAppState extends State<MyApp> {
               shrinkWrap: true,
               children: [
                 ElevatedButton(
-                  onPressed: () =>
-                      Provider.of<MarkovLearning>(context, listen: false)
-                          .makeIt(),
+                  onPressed: Provider.of<MarkovLearning>(context, listen: false)
+                      .generateMarkovChain,
                   child: Text(
                     'Make it',
                     textAlign: TextAlign.center,
