@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -26,10 +27,9 @@
   <title>chains</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <div id='test'></div>
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
@@ -94,5 +94,8 @@
       loadMainDartJs();
     }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.39/Tone.js" type="application/javascript"></script>
+  <script src="app.js" defer></script>
 </body>
+
 </html>

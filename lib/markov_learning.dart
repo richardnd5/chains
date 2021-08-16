@@ -7,10 +7,10 @@ class MarkovLearning extends ChangeNotifier {
   MarkovLearning() {
     setup();
   }
-  var text =
-      "Seahorses range in size from 1.5 to 35.5 cm (5⁄8 to 14 in). They are named for their equine appearance, with bent necks and long snouted heads and a distinctive trunk and tail. Although they are bony fish, they do not have scales, but rather thin skin stretched over a series of bony plates, which are arranged in rings throughout their bodies. Each species has a distinct number of rings.The armor of bony plates also protects them against predators,and because of this outer skeleton, they no longer have ribs.] Seahorses swim upright, propelling themselves using the dorsal fin, another characteristic not shared by their close pipefish relatives, which swim horizontally. Razorfish are the only other fish that swim vertically. The pectoral fins, located on either side of the head behind their eyes, are used for steering. They lack the caudal fin typical of fishes. Their prehensile tail is composed of square-like rings that can be unlocked only in the most extreme conditions. They are adept at camouflage, and can grow and reabsorb spiny appendages depending on their habitat.";
 
-  var order = 4;
+  var text =
+      "1;7,;2;3;4;7,;2;3;;;;;;;..2;3;5;6;3;2;3;5;;;;;;;..7;5;8;9;2';6;5;5;;;;;;;..5;2;4;3;1;3;2;1;;;;;;;..";
+  var order = 1;
   var charCount = 100;
 
   Map<String, Gram> ngramMap = {};
@@ -73,7 +73,7 @@ class MarkovLearning extends ChangeNotifier {
       generatedTexts.add(result);
       notifyListeners();
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 }
