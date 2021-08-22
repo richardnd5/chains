@@ -90,11 +90,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   playNote(int number) {
-    print(number);
     var pitches = PitchesWithOctaves().pitchesWithOctaves;
-    print(pitches);
     var letterName = pitches[number];
-    print('$letterName');
     var data = {
       "notes": [letterName],
       "noteNumber": number,
