@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'models/gram.dart';
+import '../models/gram.dart';
 
 class MarkovLearning extends ChangeNotifier {
   MarkovLearning() {
-    setup();
+    setup(
+        "1;7,;2;3;4;7,;2;3;;;;;;;..2;3;5;6;3;2;3;5;;;;;;;..7;5;8;9;2';6;5;5;;;;;;;..5;2;4;3;1;3;2;1;;;;;;;..");
   }
 
-  var text =
-      "1;7,;2;3;4;7,;2;3;;;;;;;..2;3;5;6;3;2;3;5;;;;;;;..7;5;8;9;2';6;5;5;;;;;;;..5;2;4;3;1;3;2;1;;;;;;;..";
-  var order = 1;
-  var charCount = 100;
+  String text = '';
+  var _order = 3;
+  var _charCount = 21;
 
-  Map<String, Gram> ngramMap = {};
+  Map<String, Gram> _ngramMap = {};
   List<String> generatedTexts = [];
 
-  void setup() {
+  void setup(String text) {
+    this.text = text;
     text.split('').asMap().forEach((i, element) {
-      var start = i;
-      var end = (i + order) >= text.length ? null : (i + order);
+      int start = i;
+      int? end = (i + _order) >= text.length ? null : (i + _order);
 
       String gram = text.substring(start, end);
 
-      var currentGram = ngramMap[gram];
+      var currentGram = _ngramMap[gram];
       if (currentGram == null) {
-        ngramMap[gram] = Gram(gram: gram, count: 1, nextPossibleChars: []);
+        _ngramMap[gram] = Gram(gram: gram, count: 1, nextPossibleChars: []);
         int? endCount = end == null
             ? null
             : end + 1 >= text.length
@@ -33,10 +34,10 @@ class MarkovLearning extends ChangeNotifier {
                 : end;
         String? nextText = endCount != null ? text[endCount] : null;
         if (nextText != null) {
-          ngramMap[gram]!.nextPossibleChars!.add(nextText);
+          _ngramMap[gram]!.nextPossibleChars!.add(nextText);
         }
       } else {
-        var next = currentGram.nextPossibleChars;
+        List<String>? next = currentGram.nextPossibleChars;
 
         int? endCount = end == null
             ? null
@@ -47,7 +48,7 @@ class MarkovLearning extends ChangeNotifier {
         if (nextText != null) {
           next?.add(nextText);
         }
-        ngramMap[gram] = Gram(
+        _ngramMap[gram] = Gram(
             gram: gram, count: currentGram.count + 1, nextPossibleChars: next);
       }
     });
@@ -55,10 +56,10 @@ class MarkovLearning extends ChangeNotifier {
 
   generateMarkovChain() {
     try {
-      var currentGram = text.substring(0, order);
+      var currentGram = text.substring(0, _order);
       String result = currentGram;
-      for (var i = 0; i < charCount; i++) {
-        var possibilities = ngramMap[currentGram]?.nextPossibleChars;
+      for (var i = 0; i < _charCount; i++) {
+        var possibilities = _ngramMap[currentGram]?.nextPossibleChars;
 
         var length = possibilities?.length;
         if (length != null && length != 0) {
@@ -67,13 +68,13 @@ class MarkovLearning extends ChangeNotifier {
 
           result = '$result$nextLetter';
           var len = result.length;
-          currentGram = result.substring(len - order, len);
+          currentGram = result.substring(len - _order, len);
         }
       }
       generatedTexts.add(result);
       notifyListeners();
     } catch (e) {
-      // print(e);
+      print(e);
     }
   }
 }

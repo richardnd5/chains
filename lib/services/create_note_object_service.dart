@@ -1,41 +1,12 @@
 import 'dart:async';
 
-import 'package:chains/pitches_with_octaves.dart';
+import 'package:chains/constants/pitches_with_octaves.dart';
 import 'package:quiver/async.dart';
-import 'constants/acceptable_characters.dart';
-import 'globals/global_functions.dart';
-import 'note_object.dart';
+import '../constants/acceptable_characters.dart';
+import '../globals/global_functions.dart';
+import '../models/note_object.dart';
 
 class CreateNoteObjectService {
-  static double _bpm = 120;
-
-  // StreamSubscription<NoteObject> _streamSubscription = StreamSubscription<NoteObject>();
-
-  static test() {
-    // Timer metronome = new Timer.periodic(
-    //     Duration(microseconds: Duration.microsecondsPerSecond), (_) {
-    //   print('what of it?');
-    // });
-
-    // metronome.
-
-    // metronome.listen((event) {
-    //   print('howdy! $event');
-    // });
-
-    // _metronome = metronome.listen((data) {
-    //   _increaseAtBeat();
-    //   playAtBeat(this, _atBeat.value);
-    // });
-  }
-
-  static getMicroseconds() {
-    (double bpm) {
-      final beatsPerMicrosecond = bpm / Duration.microsecondsPerMinute;
-      return 1 ~/ beatsPerMicrosecond;
-    }(_bpm);
-  }
-
   static List<NoteObject> createNoteObjectArray(
     String melodyString,
     int key,

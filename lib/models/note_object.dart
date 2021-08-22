@@ -11,19 +11,19 @@ class NoteObject {
   late int octave;
   late int startPosition;
   late int endPosition;
-  static int tempo = 120;
 
-  double _start() {
+  double _start(int tempo) {
     return (startPosition / 4) * (60 / tempo);
   }
 
-  double _end() {
-    return ((endPosition / 4) * (60 / tempo) - _start());
+  double _end(int tempo) {
+    return ((endPosition / 4) * (60 / tempo) - _start(tempo));
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson(int tempo) => {
         "notes": [letterName],
-        "duration": _end(),
-        "position": _start()
+        "noteNumber": noteNumber,
+        "duration": _end(tempo),
+        "position": _start(tempo)
       };
 }
