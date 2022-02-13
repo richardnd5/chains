@@ -11,9 +11,6 @@ class SequencerService extends ChangeNotifier {
   SequencerService(this.markovService) {
     init();
   }
-  String stringToPlay = '1';
-
-  List<NoteObject> noteList = [];
 
   init() {
     loadSampler();
@@ -23,25 +20,17 @@ class SequencerService extends ChangeNotifier {
     js.context.callMethod('loadSampler', ['Arguments can be passed here.']);
   }
 
-  void playSequence(List<NoteObject> noteList) {
-    this.noteList = noteList;
-    List<Map<String, dynamic>> theMap = [];
-    noteList.forEach((element) {
-      theMap.add(element.toJson(90));
-    });
-    var json = jsonEncode(theMap);
+  void playSequence(List<NoteObject> noteList, int tempo) {
+    var json = _serializeNoteList(noteList, tempo);
     js.context.callMethod('playSequencer', [json]);
     notifyListeners();
   }
 
-  generateChain() {
-    var chain = markovService.generateMarkovChain();
-
-    if (chain != null && chain.isNotEmpty) {
-      stringToPlay = chain.last;
-      notifyListeners();
-    } else {
-      throw Exception('No chain to generate');
-    }
+  String _serializeNoteList(List<NoteObject> noteList, int tempo) {
+    List<Map<String, dynamic>> theMap = [];
+    noteList.forEach((element) {
+      theMap.add(element.toJson(tempo));
+    });
+    return jsonEncode(theMap);
   }
 }

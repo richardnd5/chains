@@ -15,7 +15,7 @@ class MarkovLearningService extends ChangeNotifier {
   var _charCount = 21;
 
   Map<String, Gram> _ngramMap = {};
-  List<String> generatedTexts = [];
+  List<String> _generatedTexts = [];
 
   void setup(String text) {
     this.text = text;
@@ -55,8 +55,9 @@ class MarkovLearningService extends ChangeNotifier {
     });
   }
 
-  List<String>? generateMarkovChain() {
+  List<String>? generateMarkovChainFrom(String melody) {
     try {
+      setup(melody);
       var currentGram = text.substring(0, _order);
       String result = currentGram;
       for (var i = 0; i < _charCount; i++) {
@@ -72,9 +73,8 @@ class MarkovLearningService extends ChangeNotifier {
           currentGram = result.substring(len - _order, len);
         }
       }
-      generatedTexts.add(result);
-      notifyListeners();
-      return generatedTexts;
+      _generatedTexts.add(result);
+      return _generatedTexts;
     } catch (e) {
       print(e);
     }

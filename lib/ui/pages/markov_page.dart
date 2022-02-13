@@ -1,3 +1,4 @@
+import 'package:chains/constants/models.dart';
 import 'package:chains/globals/global_functions.dart';
 import 'package:chains/ui/components/moving_note_component.dart';
 import 'package:chains/ui/components/note_cell.dart';
@@ -14,6 +15,16 @@ class MarkovPage extends StatefulWidget {
 
 class _MarkovPageState extends State<MarkovPage> {
   MarkovPageViewModel? vm;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      Provider.of<MarkovPageViewModel>(context, listen: false)
+          .generateChainFrom('1;;2;;3;;4;;5;;6;;7;;8;;;;', 61, Modes.ionian);
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +66,8 @@ class _MarkovPageState extends State<MarkovPage> {
         ),
         SizedBox(height: 16),
         ElevatedButton(
-          onPressed: vm?.generateChain,
+          onPressed: () =>
+              vm?.generateChainFrom('132.132.132.', 61, Modes.ionian),
           child: Text(
             'Generate a Melody',
             textAlign: TextAlign.center,
