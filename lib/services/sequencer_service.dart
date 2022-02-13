@@ -3,12 +3,10 @@ import 'dart:convert';
 import 'dart:js' as js;
 
 import 'package:chains/models/note_object.dart';
-import 'package:chains/services/markov_learning_service.dart';
 import 'package:flutter/material.dart';
 
 class SequencerService extends ChangeNotifier {
-  MarkovLearningService markovService;
-  SequencerService(this.markovService) {
+  SequencerService() {
     init();
   }
 

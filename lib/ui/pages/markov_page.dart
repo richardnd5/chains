@@ -20,7 +20,7 @@ class _MarkovPageState extends State<MarkovPage> {
   void initState() {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       Provider.of<MarkovPageViewModel>(context, listen: false)
-          .generateChainFrom('1;;2;;3;;4;;5;;6;;7;;8;;;;', 61, Modes.ionian);
+          .generateMarkovMelody('1;;2;;3;;4;;5;;6;;7;;8;;;;', 61, Modes.ionian);
     });
 
     super.initState();
@@ -66,8 +66,10 @@ class _MarkovPageState extends State<MarkovPage> {
         ),
         SizedBox(height: 16),
         ElevatedButton(
-          onPressed: () =>
-              vm?.generateChainFrom('132.132.132.', 61, Modes.ionian),
+          onPressed: () => vm?.generateMarkovMelody(
+              "1;7,;2;3;4;7,;2;3;;;;;;;..2;3;5;6;3;2;3;5;;;;;;;..7;5;8;9;2';6;5;5;;;;;;;..5;2;4;3;1;3;2;1;;;;;;;..",
+              61,
+              Modes.ionian),
           child: Text(
             'Generate a Melody',
             textAlign: TextAlign.center,

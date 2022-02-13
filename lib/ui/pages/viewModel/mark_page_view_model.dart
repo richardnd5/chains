@@ -1,20 +1,20 @@
 import 'package:chains/constants/models.dart';
+import 'package:chains/globals/markov_chain_function.dart';
 import 'package:chains/models/note_object.dart';
 import 'package:chains/services/helpers/create_note_object_helpers.dart';
-import 'package:chains/services/markov_learning_service.dart';
 import 'package:chains/services/sequencer_service.dart';
 import 'package:flutter/material.dart';
 
 class MarkovPageViewModel extends ChangeNotifier {
   SequencerService sequencer;
-  MarkovLearningService service;
-  MarkovPageViewModel(this.sequencer, this.service);
+
+  MarkovPageViewModel(this.sequencer);
 
   String stringToPlay = '';
   List<NoteObject> noteList = [];
 
-  void generateChainFrom(String melody, int root, Mode mode) {
-    var chain = service.generateMarkovChainFrom(melody);
+  void generateMarkovMelody(String melody, int root, Mode mode) {
+    var chain = generateMarkovChainFrom(melody);
 
     if (chain != null && chain.isNotEmpty) {
       stringToPlay = chain.last;
