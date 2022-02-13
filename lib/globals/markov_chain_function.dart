@@ -2,17 +2,21 @@ import 'dart:math';
 
 import '../models/gram.dart';
 
-/// This function will generate a Markov Chain from the provided text.
-List<String>? generateMarkovChainFrom(
+/// This function will generate a Markov Chain from the given text.
+///
+/// If the startingSeed is null, the function will use the first (n) characters of
+/// the provided text, where n = orderLength
+///
+/// The chainCharacterLength is the total length to generate PLUS the startingSeed
+String? generateMarkovChainFrom(
   String text, {
+  String? startingSeed,
   int chainCharacterLength = 21,
   int orderLength = 3,
 }) {
-  print('start: ${DateTime.now()}');
   try {
     final _ngramMap = _createGramMap(text, orderLength);
-    List<String> _generatedTexts = [];
-    String currentGram = text.substring(0, orderLength);
+    String currentGram = startingSeed ?? text.substring(0, orderLength);
     String result = currentGram;
     for (var i = 0; i < chainCharacterLength; i++) {
       final possibilities = _ngramMap[currentGram]?.nextPossibleChars;
@@ -21,19 +25,15 @@ List<String>? generateMarkovChainFrom(
       if (length != null && length != 0) {
         int randomNumber = new Random().nextInt(length > 0 ? length : 0);
         String? nextLetter = possibilities?[randomNumber];
-
-        result = '$result$nextLetter';
+        result += nextLetter ?? '';
         int len = result.length;
         currentGram = result.substring(len - orderLength, len);
       }
     }
-    _generatedTexts.add(result);
-    return _generatedTexts;
+    return result;
   } catch (e) {
     print(e);
     return null;
-  } finally {
-    print('end: ${DateTime.now()}');
   }
 }
 
@@ -43,42 +43,27 @@ Map<String, Gram> _createGramMap(String text, int orderLength) {
   text.split('').asMap().forEach((i, element) {
     int start = i;
     int? end = (i + orderLength) >= text.length ? null : (i + orderLength);
-
     String gram = text.substring(start, end);
+    int? endCount = end == null
+        ? null
+        : end + 1 >= text.length
+            ? null
+            : end;
 
+    String? nextText = endCount != null ? text[endCount] : null;
     final currentGram = _ngramMap[gram];
-    if (currentGram == null) {
-      _ngramMap[gram] = Gram(
-        gram: gram,
-        count: 1,
-        nextPossibleChars: [],
-      );
-      int? endCount = end == null
-          ? null
-          : end + 1 >= text.length
-              ? null
-              : end;
-      String? nextText = endCount != null ? text[endCount] : null;
-      if (nextText != null) {
-        _ngramMap[gram]!.nextPossibleChars!.add(nextText);
-      }
-    } else {
-      List<String>? nextPossibleChars = currentGram.nextPossibleChars;
+    bool newGram = currentGram == null;
 
-      int? endCount = end == null
-          ? null
-          : end + 1 >= text.length
-              ? null
-              : end;
-      String? nextText = endCount != null ? text[endCount] : null;
-      if (nextText != null) {
-        nextPossibleChars?.add(nextText);
-      }
-      _ngramMap[gram] = Gram(
-        gram: gram,
-        count: currentGram.count + 1,
-        nextPossibleChars: nextPossibleChars,
-      );
+    List<String>? nextPossibleCharsList = currentGram?.nextPossibleChars ?? [];
+
+    _ngramMap[gram] = Gram(
+      gram: gram,
+      count: newGram ? 1 : currentGram.count + 1,
+      nextPossibleChars: nextPossibleCharsList,
+    );
+
+    if (nextText != null) {
+      nextPossibleCharsList.add(nextText);
     }
   });
   return _ngramMap;

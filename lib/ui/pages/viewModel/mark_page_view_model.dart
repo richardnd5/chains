@@ -17,7 +17,7 @@ class MarkovPageViewModel extends ChangeNotifier {
     var chain = generateMarkovChainFrom(melody);
 
     if (chain != null && chain.isNotEmpty) {
-      stringToPlay = chain.last;
+      stringToPlay = chain;
 
       noteList = createNoteObjectArray(
         stringToPlay,
