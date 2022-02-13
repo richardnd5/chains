@@ -8,7 +8,7 @@ import '../models/gram.dart';
 /// the provided text, where n = orderLength
 ///
 /// The chainCharacterLength is the total length to generate PLUS the startingSeed
-String? generateMarkovChainFrom(
+String? generateMarkovChain(
   String text, {
   String? startingSeed,
   int chainCharacterLength = 21,
