@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 
 import '../models/gram.dart';
 
-class MarkovLearning extends ChangeNotifier {
-  MarkovLearning() {
+class MarkovLearningService extends ChangeNotifier {
+  MarkovLearningService() {
     setup(
         "1;7,;2;3;4;7,;2;3;;;;;;;..2;3;5;6;3;2;3;5;;;;;;;..7;5;8;9;2';6;5;5;;;;;;;..5;2;4;3;1;3;2;1;;;;;;;..");
   }
@@ -54,7 +55,7 @@ class MarkovLearning extends ChangeNotifier {
     });
   }
 
-  generateMarkovChain() {
+  List<String>? generateMarkovChain() {
     try {
       var currentGram = text.substring(0, _order);
       String result = currentGram;
@@ -73,8 +74,10 @@ class MarkovLearning extends ChangeNotifier {
       }
       generatedTexts.add(result);
       notifyListeners();
+      return generatedTexts;
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }
