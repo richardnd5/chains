@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:chains/extensions/rescale.dart';
-import 'package:chains/jsFunctions/js_functions.dart';
+import 'package:chains/globals/numbers/rescale.dart';
+import 'package:chains/services/sequencer/jsFunctions/js_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:js/js.dart';
 

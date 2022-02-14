@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import '../models/gram.dart';
+import './models/gram.dart';
 
 /// This function will generate a Markov Chain from the given text.
 ///

@@ -1,8 +1,8 @@
-import 'package:chains/constants/pitches_with_octaves.dart';
+import 'package:chains/services/sequencer/models/note_object.dart';
 
-import '../../constants/acceptable_characters.dart';
-import '../../globals/global_functions.dart';
-import '../../models/note_object.dart';
+import '../constants/acceptable_characters.dart';
+import '../constants/pitches_with_octaves.dart';
+import 'global_functions.dart';
 
 List<NoteObject> createNoteObjectArray(
   String melodyString,

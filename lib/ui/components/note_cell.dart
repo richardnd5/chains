@@ -1,8 +1,9 @@
 import 'dart:convert';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
-import 'package:chains/constants/pitches_with_octaves.dart';
-import 'package:chains/models/note_object.dart';
+import 'package:chains/services/sequencer/constants/pitches_with_octaves.dart';
+import 'package:chains/services/sequencer/models/note_object.dart';
 import 'package:flutter/material.dart';
 
 class NoteCell extends StatelessWidget {

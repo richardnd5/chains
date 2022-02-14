@@ -1,9 +1,10 @@
-import 'package:chains/constants/models.dart';
-import 'package:chains/globals/markov_chain_function.dart';
-import 'package:chains/models/note_object.dart';
-import 'package:chains/services/helpers/create_note_object_helpers.dart';
-import 'package:chains/services/sequencer_service.dart';
+import 'package:chains/services/markvov/markov_chain_function.dart';
+import 'package:chains/services/sequencer/constants/models.dart';
+import 'package:chains/services/sequencer/models/note_object.dart';
+import 'package:chains/services/sequencer/sequencer_service.dart';
 import 'package:flutter/material.dart';
+
+import '../../../services/sequencer/helpers/create_note_object_helpers.dart';
 
 class MarkovPageViewModel extends ChangeNotifier {
   SequencerService sequencer;

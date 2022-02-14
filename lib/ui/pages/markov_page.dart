@@ -1,7 +1,7 @@
-import 'package:chains/constants/models.dart';
-import 'package:chains/globals/global_functions.dart';
+import 'package:chains/services/sequencer/constants/models.dart';
 import 'package:chains/ui/components/moving_note_component.dart';
 import 'package:chains/ui/components/note_cell.dart';
+import 'package:chains/ui/helpers/page_gradient.dart';
 import 'package:chains/ui/pages/viewModel/mark_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
