@@ -1,4 +1,5 @@
-import 'package:chains/ui/pages/markov_page.dart';
+import 'package:chains/ui/pages/markov/markov_page.dart';
+import 'package:chains/ui/pages/opening/opening_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,6 +7,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return OpeningPage();
     return MarkovPage();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:chains/app.dart.dart';
 import 'package:chains/services/sequencer/sequencer_service.dart';
-import 'package:chains/ui/pages/viewModel/mark_page_view_model.dart';
+import 'package:chains/ui/pages/markov/viewModel/mark_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
